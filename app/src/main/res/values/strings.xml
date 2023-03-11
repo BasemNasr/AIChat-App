@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AI Chat (ChatGPT)</string>
+    <string name="chat">AI Chat</string>
+    <string name="type_a_message">Type a message</string>
+</resources>
