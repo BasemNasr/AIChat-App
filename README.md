@@ -2,7 +2,7 @@
 Demo Chat app for using Open-AI api 
 
 
-![alt text](https://i.ibb.co/tJdxpth/Chat-AI.png))
+![alt text](https://i.ibb.co/tJdxpth/Chat-AI.png)
 
 
 
