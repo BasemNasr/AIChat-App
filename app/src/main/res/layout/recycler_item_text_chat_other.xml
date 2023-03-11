@@ -11,9 +11,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="220dp"
+        android:maxWidth="280dp"
         android:layout_gravity="end"
-        android:background="@drawable/bg_color_gray_10dp_rect"
+        android:background="@drawable/bg_purple_10dp_rect"
         android:paddingVertical="12dp"
         android:paddingStart="10dp"
         android:paddingEnd="4dp"
@@ -27,29 +27,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:maxLines="30"
-            android:maxWidth="190dp"
-            app:layout_constrainedWidth="true"
-            app:layout_constrainedHeight="true"
+            android:maxWidth="280dp"
             android:textAlignment="viewStart"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/tvOtherChatMessageTime"
-            app:layout_constraintHorizontal_bias="0"
+            android:autoLink="web"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Hello! where are you
-right now?" />
+            tools:text="Hello! where are you?" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvOtherChatMessageTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="viewStart"
-            android:textColor="#8E8EA9"
+            android:textColor="@color/white"
             android:textSize="8sp"
             app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvOtherChatMessage"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="08:13pm" />
     </androidx.constraintlayout.widget.ConstraintLayout>

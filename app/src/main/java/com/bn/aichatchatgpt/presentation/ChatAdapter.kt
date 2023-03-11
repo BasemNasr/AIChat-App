@@ -1,22 +1,20 @@
 package com.bn.aichatchatgpt.presentation
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bn.aichatchatgpt.R
-import com.bn.aichatchatgpt.data.models.MessageModel
+import com.bn.aichatchatgpt.data.models.CompletionResponse
 import com.bn.aichatchatgpt.databinding.RecyclerItemTextChatMeBinding
 import com.bn.aichatchatgpt.databinding.RecyclerItemTextChatOtherBinding
+import java.text.SimpleDateFormat
 import java.util.*
 
 
 class ChatAdapter(
-    private val mContext: Context,
-    private val MyUserId: Int,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var messages: ArrayList<MessageModel> = ArrayList()
+    private var messages: ArrayList<CompletionResponse> = ArrayList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -44,16 +42,16 @@ class ChatAdapter(
     }
 
 
-    fun addMessages(list: ArrayList<MessageModel>) {
+    fun addMessages(list: ArrayList<CompletionResponse>) {
         messages.addAll(messages.size, list)
         notifyItemRangeInserted(messages.size, list.size)
     }
 
-    fun getMessages(): ArrayList<MessageModel> {
+    fun getMessages(): ArrayList<CompletionResponse> {
         return messages
     }
 
-    fun addMessage(message: MessageModel) {
+    fun addMessage(message: CompletionResponse) {
         messages.add(0, message)
         notifyItemInserted(0)
         notifyItemRangeChanged(0, messages.size, messages)
@@ -97,19 +95,11 @@ class ChatAdapter(
         /*
         * TextMe = 0
         * TextOther = 1
-        * OfferMe = 2
-        * OfferOther = 3
-        * */
-        when (messages[position].message_type) {
-            "text" -> {
-                return if (messages[position].message_position == "me") {
-                    //me & text
-                    0
-                } else {
-                    //other & text
-                    1
-                }
-            }
+        */
+        if (messages[position].my_message != null) {
+            return 0
+        } else {
+            return 1
         }
         return 0
     }
@@ -118,9 +108,9 @@ class ChatAdapter(
     // text message and file name for me 0
     inner class ChatMeMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = RecyclerItemTextChatMeBinding.bind(itemView)
-        fun bind(item: MessageModel) = with(itemView) {
-            binding.tvMeChatMessage.text = item.message
-            binding.tvMeChatMessageTime.text = item.ago_time
+        fun bind(item: CompletionResponse) = with(itemView) {
+            binding.tvMeChatMessage.text = item.my_message
+            binding.tvMeChatMessageTime.text = "${getCurrentTime()}"
 
         }
 
@@ -129,11 +119,19 @@ class ChatAdapter(
     // text message and file name for other 1
     inner class ChatOtherMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = RecyclerItemTextChatOtherBinding.bind(itemView)
-        fun bind(item: MessageModel) = with(itemView) {
-            binding.tvOtherChatMessage.text = item.message
-            binding.tvOtherChatMessageTime.text = item.ago_time
+        fun bind(item: CompletionResponse) = with(itemView) {
+            if (item.choices?.isNotEmpty() == true) {
+                binding.tvOtherChatMessage.text = "${item.choices[0]?.text}"
+            } else {
+                binding.tvOtherChatMessage.text = "No Response"
+            }
+            binding.tvOtherChatMessageTime.text = "${getCurrentTime()}"
         }
 
+    }
+
+    private fun getCurrentTime():String{
+        return SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
     }
 
 

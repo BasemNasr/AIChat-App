@@ -3,22 +3,23 @@ plugins {
     id 'kotlin-android'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
-    id 'com.google.gms.google-services'
     id 'kotlin-parcelize'
 }
 
 android {
     namespace 'com.bn.aichatchatgpt'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.bn.aichatchatgpt"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "CHAT_GPT_KEY", "\"REPLACE_WITH_YOUR_API_KEY\""
+
     }
 
     buildTypes {
@@ -78,8 +79,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.5'
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.5'
 
-    //Security
-    implementation("androidx.security:security-crypto:1.0.0")
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.14.2'
