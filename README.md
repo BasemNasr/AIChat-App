@@ -6,7 +6,7 @@ Demo Chat app for using Open-AI api
 
 
 
-✅💻 Adding your personal api key?
+💻 Adding your personal api key?
 
 
  1.Open build.gradle file
